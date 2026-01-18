@@ -8,6 +8,8 @@
 
 Упор на поддержку, читаемость
 
+Аутентификация по JWT
+
 Стек
 - Spring boot, security, jpa
 - nimbus-jose-jwt
