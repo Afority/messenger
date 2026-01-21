@@ -1,12 +1,15 @@
 package com.github.messenger.infrastructure.mapper;
 
-import com.github.messenger.domain.entity.UserEntity;
+import com.github.messenger.domain.entity.User;
 import com.github.messenger.domain.value_objects.Login;
 import com.github.messenger.domain.value_objects.UserId;
-import com.github.messenger.infrastructure.repository.entity.UserDbEntity;
+import com.github.messenger.infrastructure.repository.entity.UserJpaEntity;
+import com.github.messenger.infrastructure.repository.entity.UserPresenceJpaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.time.Instant;
 
 @Component
 public class UserMapper {
@@ -17,18 +20,21 @@ public class UserMapper {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserEntity mapToEntity(UserDbEntity userDbEntity) {
-        return new UserEntity(
-                new UserId(userDbEntity.getId()),
-                new Login(userDbEntity.getLogin()),
-                userDbEntity.getPassword()
+    public User mapToEntity(UserJpaEntity userJpaEntity) {
+        return new User(
+                new UserId(userJpaEntity.getId()),
+                new Login(userJpaEntity.getLogin()),
+                userJpaEntity.getPassword(),
+                userJpaEntity.getPresence().getIsOnline(),
+                Instant.ofEpochSecond(userJpaEntity.getPresence().getLastSeen())
         );
     }
-    public UserDbEntity mapToDbEntity(UserEntity userEntity) {
-        return new UserDbEntity(
-                userEntity.getId(),
-                userEntity.getLogin(),
-                passwordEncoder.encode(userEntity.getPassword())
+    public UserJpaEntity mapToDbEntity(User userEntity) {
+        return new UserJpaEntity(
+                userEntity.getId().value(),
+                userEntity.getLogin().getValue(),
+                passwordEncoder.encode(userEntity.getPassword()),
+                new UserPresenceJpaEntity(userEntity.getLastSeen().getEpochSecond(), userEntity.isOnline())
         );
     }
 }
