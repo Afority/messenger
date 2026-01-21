@@ -1,7 +1,7 @@
 package com.github.messenger.infrastructure.security;
 
 import com.github.messenger.infrastructure.repository.UserJpaRepository;
-import com.github.messenger.infrastructure.repository.entity.UserDbEntity;
+import com.github.messenger.infrastructure.repository.entity.UserJpaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        UserDbEntity user = userRepository.findByLogin(login).orElseThrow(
+        UserJpaEntity user = userRepository.findByLogin(login).orElseThrow(
                 () -> new UsernameNotFoundException(String.format("User %s not found", login)));
 
         return new UserDetailsImpl(login, user.getPassword());
