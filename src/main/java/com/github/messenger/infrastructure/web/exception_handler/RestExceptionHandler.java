@@ -8,11 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class RestExceptionHandler {
-    @ExceptionHandler(InvalidUserIdException.class)
-    public ResponseEntity<String> handleInvalidUserIdException(InvalidUserIdException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
-
     @ExceptionHandler(LoginIsInvalidException.class)
     public ResponseEntity<String> handleLoginIsInvalidException(LoginIsInvalidException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
