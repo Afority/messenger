@@ -6,9 +6,11 @@ import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import jakarta.annotation.PostConstruct;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.time.Instant;
@@ -38,7 +40,7 @@ public class JwtCore {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-                .claim("username", userDetails.getUsername())
+                .claim("userId", userDetails.getId())
                 .notBeforeTime(Date.from(Instant.now()))
                 .expirationTime(Date.from(Instant.now().plusSeconds(jwtLifetime)))
                 .build();
@@ -74,12 +76,12 @@ public class JwtCore {
         return false;
     }
 
-    public String getUsernameFromToken(String token) { // throws null pointer exception
+    public @Nullable Long getUserIdFromToken(@NotNull String token) {
         try {
             JWSObject jws = JWSObject.parse(token);
-            return jws.getPayload().toJSONObject().get("username").toString();
+            return (Long) jws.getPayload().toJSONObject().get("userId");
         }
-        catch (ParseException e) {
+        catch (ParseException | NullPointerException e) {
             return null;
         }
     }

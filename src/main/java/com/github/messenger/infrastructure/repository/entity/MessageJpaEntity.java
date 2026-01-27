@@ -1,32 +1,31 @@
 package com.github.messenger.infrastructure.repository.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+
 
 @Entity
 @Table(name = "messages")
-@Data
 public class MessageJpaEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @Column(name = "message_number")
+    private Long messageNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
     private UserJpaEntity sender;
 
-    @Column(nullable = false)
-    private Long sendingTime;
-
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "chat_id")
     private ChatJpaEntity chat;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "content_id")
-    private ContentJpaEntity content;
+    private Long sendingTime;
 
-    private boolean isEdited;
+    @Enumerated(EnumType.STRING)
+    private ContentType contentType;
+
+    private boolean edited;
     private Long lastEditedTime;
 }
-
-

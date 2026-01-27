@@ -10,4 +10,5 @@ public interface UserRepository {
     Optional<User> findByLogin(Login login);
     void save(Login login, String hashedPassword);
     boolean existsByLogin(Login login);
+    boolean existsById(UserId id);
 }

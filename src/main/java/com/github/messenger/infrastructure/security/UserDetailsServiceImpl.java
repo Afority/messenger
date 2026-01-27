@@ -22,6 +22,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserJpaEntity user = userRepository.findByLogin(login).orElseThrow(
                 () -> new UsernameNotFoundException(String.format("User %s not found", login)));
 
-        return new UserDetailsImpl(login, user.getPassword());
+        return new UserDetailsImpl(user.getId(), login, user.getPassword());
+    }
+
+    public UserDetails loadUserById(Long id) throws UsernameNotFoundException {
+        UserJpaEntity user = userRepository.findById(id).orElseThrow(
+                () -> new UsernameNotFoundException(String.format("User %s not found", id))
+        );
+        return new UserDetailsImpl(user.getId(), user.getLogin(), user.getPassword());
     }
 }

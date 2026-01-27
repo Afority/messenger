@@ -1,5 +1,6 @@
 package com.github.messenger.infrastructure.security;
 
+import lombok.Getter;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,10 +9,13 @@ import java.util.Collection;
 import java.util.List;
 
 public class UserDetailsImpl implements UserDetails {
+    @Getter
+    private long id;
     private String username;
     private String password;
 
-    public UserDetailsImpl(String username, String password) {
+    public UserDetailsImpl(long id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
     }
@@ -50,4 +54,5 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

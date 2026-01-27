@@ -4,10 +4,9 @@ import com.github.messenger.domain.entity.User;
 import com.github.messenger.domain.repository.UserRepository;
 import com.github.messenger.domain.value_objects.Login;
 import com.github.messenger.domain.value_objects.UserId;
-import com.github.messenger.infrastructure.mapper.UserMapper;
+import com.github.messenger.infrastructure.repository.mapper.UserMapper;
 import com.github.messenger.infrastructure.repository.UserJpaRepository;
 import com.github.messenger.infrastructure.repository.entity.UserJpaEntity;
-import com.github.messenger.infrastructure.repository.entity.UserPresenceJpaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,11 +39,16 @@ public class UserRepositoryAdapter implements UserRepository {
 
     @Override
     public void save(Login login, String hashedPassword) {
-        userJpaRepository.save(new UserJpaEntity(login.getValue(), hashedPassword, new UserPresenceJpaEntity()));
+        userJpaRepository.save(new UserJpaEntity(login.getValue(), hashedPassword));
     }
 
     @Override
     public boolean existsByLogin(Login login) {
         return userJpaRepository.existsByLogin(login.getValue());
+    }
+
+    @Override
+    public boolean existsById(UserId id) {
+        return userJpaRepository.existsById(id.value());
     }
 }

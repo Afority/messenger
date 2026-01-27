@@ -48,8 +48,10 @@ public class WebSecurityConfig {
                     httpSessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/auth/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/**").permitAll()
+                        // .requestMatchers("/auth/**").permitAll()
+                        // .requestMatchers("/modules/*").permitAll()
+                        // .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

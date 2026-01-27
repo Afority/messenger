@@ -1,5 +1,6 @@
 package com.github.messenger.infrastructure.security.filters;
 
+import com.github.messenger.infrastructure.helper.BearerTokenExtractorHelper;
 import com.github.messenger.infrastructure.security.JwtCore;
 import com.github.messenger.infrastructure.security.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
@@ -11,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -20,23 +22,31 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
     UserDetailsServiceImpl userDetailsService;
     JwtCore jwtCore;
+    BearerTokenExtractorHelper jwtExtractorHelper;
 
     @Autowired
-    public JwtFilter(UserDetailsServiceImpl userDetailsService, JwtCore jwtCore) {
+    public JwtFilter(UserDetailsServiceImpl userDetailsService, JwtCore jwtCore,  BearerTokenExtractorHelper jwtExtractorHelper) {
         this.userDetailsService = userDetailsService;
         this.jwtCore = jwtCore;
+        this.jwtExtractorHelper = jwtExtractorHelper;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            String token = authorizationHeader.substring(7);
-            if (jwtCore.verifyToken(token)) {
-                String login = jwtCore.getUsernameFromToken(token);
-                UserDetails userDetails = userDetailsService.loadUserByUsername(login);
-                Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(auth);
+
+        String token = jwtExtractorHelper.extract(authorizationHeader);
+
+        if (token != null && jwtCore.verifyToken(token)) {
+            Long userId = jwtCore.getUserIdFromToken(token);
+
+            if (userId != null) {
+                try {
+                    UserDetails userDetails = userDetailsService.loadUserById(userId);
+                    Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                } catch (UsernameNotFoundException ignored) {}
             }
         }
 
