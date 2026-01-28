@@ -1,10 +1,12 @@
 package com.github.messenger.infrastructure.repository.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 
 @Entity
 @Table(name = "messages")
+@Getter
 public class MessageJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +30,15 @@ public class MessageJpaEntity {
 
     private boolean edited;
     private Long lastEditedTime;
+
+    public MessageJpaEntity() {
+    }
+
+    public MessageJpaEntity(Long messageNumber, UserJpaEntity sender, ChatJpaEntity chat, long sendingTime, ContentType contentType) {
+        this.messageNumber = messageNumber;
+        this.sender = sender;
+        this.chat = chat;
+        this.sendingTime = sendingTime;
+        this.contentType = contentType;
+    }
 }
