@@ -1,60 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <title>Simple Frontend</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Simple Messenger — Demo</title>
     <link rel="stylesheet" href="styles.css" />
-
-    <!-- SockJS + STOMP -->
-    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <!-- SockJS + Stomp (UMD builds) -->
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
 </head>
 <body>
+<div class="app">
 
-<div class="container">
-
-    <!-- AUTH -->
-    <div id="auth">
-        <h2>Аутентификация</h2>
-
-        <div class="auth-forms">
-            <form id="signup-form">
-                <h3>Регистрация</h3>
-                <input type="text" placeholder="Login" id="signup-login" required />
-                <input type="password" placeholder="Password" id="signup-password" required />
-                <button type="submit">Sign up</button>
-            </form>
-
-            <form id="signin-form">
-                <h3>Вход</h3>
-                <input type="text" placeholder="Login" id="signin-login" required />
-                <input type="password" placeholder="Password" id="signin-password" required />
-                <button type="submit">Sign in</button>
-            </form>
+    <!-- Login / Signup -->
+    <div id="auth-screen" class="card auth-card">
+        <h2>Вход / Регистрация</h2>
+        <div class="form-row">
+            <label for="login">Login</label>
+            <input id="login" type="text" placeholder="login" />
+        </div>
+        <div class="form-row">
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="password" />
+        </div>
+        <div class="buttons">
+            <button id="signupBtn" class="btn">Зарегистрироваться</button>
+            <button id="signinBtn" class="btn primary">Войти</button>
         </div>
 
-        <div class="error" id="auth-error"></div>
+        <div class="debug">
+            <button id="checkAuthBtn" class="btn small">GET /secured (debug)</button>
+            <span id="authResult" class="muted"></span>
+        </div>
     </div>
 
-    <!-- ACTIONS -->
-    <div id="actions" class="hidden">
-        <h2>Действия</h2>
-
-        <div class="actions-list">
-            <div class="action-card" id="action-create-chat">
-                Создать приватный чат
+    <!-- Main app (hidden until auth) -->
+    <div id="main-screen" class="hidden">
+        <header class="header">
+            <div class="header-left">
+                <h1>Messenger</h1>
+                <div id="currentUser" class="muted"></div>
             </div>
-        </div>
+            <div class="header-right">
+                <button id="logoutBtn" class="btn small">Выйти</button>
+            </div>
+        </header>
 
-        <div id="action-form" class="action-form hidden">
-            <h3>Создание приватного чата</h3>
-            <input type="number" id="chat-user-id" placeholder="User ID" />
-            <button id="create-chat-btn">Создать</button>
-        </div>
+        <div class="container">
+            <!-- Left column: chats + create chat -->
+            <aside class="sidebar">
+                <div class="create-chat card">
+                    <h3>Создать приватный чат</h3>
+                    <div class="form-row">
+                        <label for="createUserId">User ID (long)</label>
+                        <input id="createUserId" type="number" placeholder="123" />
+                    </div>
+                    <div class="buttons">
+                        <button id="createChatBtn" class="btn">Создать чат</button>
+                    </div>
+                    <div id="createChatStatus" class="muted small"></div>
+                </div>
 
-        <div class="error" id="action-error"></div>
+                <div class="chat-list card">
+                    <h3>Чаты</h3>
+                    <ul id="chatsUl" class="chats"></ul>
+                </div>
+            </aside>
+
+            <!-- Right column: chat window -->
+            <main class="chat-window card">
+                <div id="chatHeader" class="chat-header muted">Выберите чат</div>
+                <div id="messages" class="messages"></div>
+
+                <form id="sendForm" class="send-form hidden">
+                    <input id="messageInput" type="text" placeholder="Введите сообщение..." autocomplete="off" />
+                    <button id="sendBtn" class="btn primary">Отправить</button>
+                </form>
+            </main>
+        </div>
     </div>
 
+    <!-- Simple global notifier -->
+    <div id="toast" class="toast hidden"></div>
 </div>
 
 <script src="app.js"></script>

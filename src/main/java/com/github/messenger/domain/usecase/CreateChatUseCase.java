@@ -1,7 +1,5 @@
 package com.github.messenger.domain.usecase;
 
-import com.github.messenger.domain.entity.GroupChat;
-import com.github.messenger.domain.entity.PersonalChat;
 import com.github.messenger.domain.exceptions.UserNotFoundException;
 import com.github.messenger.domain.repository.ChatRepository;
 import com.github.messenger.domain.repository.UserRepository;

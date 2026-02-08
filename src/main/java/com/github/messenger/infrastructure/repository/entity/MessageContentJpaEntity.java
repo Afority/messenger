@@ -5,8 +5,11 @@ import lombok.Getter;
 
 @Entity
 @Getter
+@Table(name="message_content")
 public class MessageContentJpaEntity {
     @Id
+    private Long id;
+
     @OneToOne
     @MapsId
     @JoinColumn(name = "message_id")

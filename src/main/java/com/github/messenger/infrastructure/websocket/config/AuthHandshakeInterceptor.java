@@ -39,7 +39,7 @@ public class AuthHandshakeInterceptor implements HandshakeInterceptor {
 
         if (token != null) {
             if (jwtCore.verifyToken(token)) {
-                attributes.put("userId", jwtCore.getUserIdFromToken(token));
+                attributes.put("userId", String.valueOf(jwtCore.getUserIdFromToken(token)));
                 return true;
             }
         }

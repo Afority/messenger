@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class ChatRepositoryAdapter implements ChatRepository {
@@ -43,5 +44,16 @@ public class ChatRepositoryAdapter implements ChatRepository {
                                 new ChatMemberJpaEntity(new UserJpaEntity(memberId.value()), savedChat)).toList()
         );
         return new ChatId(savedChat.getId());
+    }
+
+    @Override
+    public PersonalChat findPersonalChat(ChatId chatId) {
+        List<UserId> members =
+                chatMembersJpaRepository.getChatMembers(chatId.value())
+                        .stream()
+                        .map(member -> new UserId(member.getUser().getId()))
+                        .toList();
+
+        return new PersonalChat(chatId, members);
     }
 }
