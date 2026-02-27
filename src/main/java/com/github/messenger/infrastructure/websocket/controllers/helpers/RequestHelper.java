@@ -44,24 +44,4 @@ public class RequestHelper {
             throw new IllegalArgumentException("Missing fields: " + Arrays.toString(missingFields.toArray()));
         }
     }
-
-    public static UserId extractUserId(SimpMessageHeaderAccessor headerAccessor) {
-        Map<String, Object> attrs = headerAccessor.getSessionAttributes();
-
-        if (attrs == null || !attrs.containsKey("userId")) {
-            throw new IllegalArgumentException("User not authenticated");
-        }
-
-        return new UserId((Long) attrs.get("userId"));
-    }
-
-    public static long extractRequestId(SimpMessageHeaderAccessor headerAccessor) {
-        Map<String, Object> attrs = headerAccessor.getSessionAttributes();
-
-        if (attrs == null || !attrs.containsKey("requestId")) {
-            throw new IllegalArgumentException("request id is null");
-        }
-
-        return (Long) attrs.get("requestId");
-    }
 }

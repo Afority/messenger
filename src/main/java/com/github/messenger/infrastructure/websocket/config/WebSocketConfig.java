@@ -1,35 +1,24 @@
 package com.github.messenger.infrastructure.websocket.config;
 
+import com.github.messenger.infrastructure.websocket.WebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
-import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.config.annotation.*;
 
 @Configuration
-@EnableWebSocketMessageBroker
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
-    AuthHandshakeInterceptor authHandshakeInterceptor;
+@EnableWebSocket
+public class WebSocketConfig implements WebSocketConfigurer {
+    private final WebSocketHandler customWebSocketHandler;
 
-    @Autowired
-    public void setAuthHandshakeInterceptor(AuthHandshakeInterceptor authHandshakeInterceptor) {
-        this.authHandshakeInterceptor = authHandshakeInterceptor;
+    public WebSocketConfig(WebSocketHandler customWebSocketHandler) {
+        this.customWebSocketHandler = customWebSocketHandler;
     }
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic", "/queue");
-        config.setApplicationDestinationPrefixes("/app");
-        config.setUserDestinationPrefix("/user");
-    }
-
-    @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws")
-                .addInterceptors(authHandshakeInterceptor)
-                .setAllowedOriginPatterns("*")
-                .withSockJS();
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(customWebSocketHandler, "/ws")
+                .setAllowedOrigins("*");
     }
 
 }
