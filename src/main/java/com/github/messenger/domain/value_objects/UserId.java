@@ -8,6 +8,12 @@ public record UserId (long value) {
     }
 
     @Override
+    public boolean equals(Object o) {
+        UserId userId = (UserId) o;
+        return this.value() == userId.value();
+    }
+
+    @Override
     public @NotNull String toString() {
         return Long.toString(value);
     }

@@ -31,8 +31,8 @@ public final class GroupChat implements Chat {
         Objects.requireNonNull(name);
         Objects.requireNonNull(participants);
 
-        if (participants.isEmpty())
-            throw new IllegalStateException("В чате должен быть хотя бы 1 участник");
+        if (participants.isEmpty() || participants.size() < 2)
+            throw new IllegalStateException("В чате должны быть хотя бы 2 участника");
 
         this.chatId = chatId;
         this.name = name;
