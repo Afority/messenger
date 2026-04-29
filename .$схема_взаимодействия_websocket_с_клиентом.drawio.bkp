@@ -1,0 +1,109 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram name="Страница — 1" id="o_Oyd1l7zU_uY4TQPK0h">
+    <mxGraphModel dx="815" dy="479" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="jrfiSM9zj_L3T26sn3Kl-1" value="WebSocketHandler" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jrfiSM9zj_L3T26sn3Kl-4" value="принял сообщение" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="340" y="350" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jrfiSM9zj_L3T26sn3Kl-5" value="RequestHandler" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="R9lula8As4lQiv6EFPcS-1" value="UsersSessions - хранит сессии пользователей&lt;div&gt;&lt;br&gt;&lt;div&gt;&lt;div&gt;Map&amp;lt;Long, ClientConnections&amp;gt;&lt;/div&gt;&lt;div&gt;Map&amp;lt;String, Long&amp;gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="767.5" y="380" width="240" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="R9lula8As4lQiv6EFPcS-3" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="877.5" y="500" as="sourcePoint" />
+            <mxPoint x="877.5" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R9lula8As4lQiv6EFPcS-4" value="ClientConnections - хранит подключения устройств&lt;div&gt;&lt;br&gt;&lt;div&gt;Set&amp;lt;ClientConnection&amp;gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="760" y="560" width="245" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="R9lula8As4lQiv6EFPcS-5" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="877.5" y="650" as="sourcePoint" />
+            <mxPoint x="877.5" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R9lula8As4lQiv6EFPcS-6" value="&lt;div&gt;ClientConnection&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;WebSocketSession&lt;/div&gt;&lt;div&gt;Queue&amp;lt;String&amp;gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="760" y="740" width="247.5" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-1" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="470" as="sourcePoint" />
+            <mxPoint x="400" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-2" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="620" as="sourcePoint" />
+            <mxPoint x="400" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-3" value="OpcodeHandler" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="710" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-4" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="790" as="sourcePoint" />
+            <mxPoint x="400" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-5" value="Controller" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-6" value="Достает opcode, requestId" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="240" y="530" width="80" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-7" value="вызывает подходящий обработчик под opcode" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="240" y="620" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-8" value="парсит payload" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="230" y="725" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-9" value="вызывает контроллер для обработки запроса и если запрос подразумевает ответ, отправляет пользователю его" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="180" y="780" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-10" value="Валидирует запрос через domain сущности и вызывает use case для обработки" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="140" y="850" width="190" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-11" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="840" as="sourcePoint" />
+            <mxPoint x="440" y="790" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-14" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="430" y="670" as="sourcePoint" />
+            <mxPoint x="430" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-15" value="возвращает ответ в DTO" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="450" y="620" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-16" value="возвращает ответ в DTO" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="460" y="790" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-17" value="сериализует и отправляет пользователю ответ" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="450" y="534" width="220" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-18" value="Система pub sub" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="210" y="1040" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-19" value="1 - Пользователь подписывается на свои чаты&lt;div&gt;При новом сообщении оно рассылается всем участникам&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Издатель:&lt;/div&gt;&lt;div&gt;контролллер&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Подписчик:&lt;/div&gt;&lt;div&gt;пользователь&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="120" y="1090" width="400" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="Hj7DWiH6QXXtO51gOt4N-20" value="2 - event&lt;br&gt;Регистрируется событие и его ловит обработчик.&amp;nbsp;&lt;div&gt;Например событие отправки сообщения. Он видит кто отправил, куда отправил и сам отправляет всем участникам.&lt;/div&gt;&lt;div&gt;Минусы: нужно лазить в бд при каждом сообщении, что бы узнать, кто получатели&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="580" y="1080" width="490" height="110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
