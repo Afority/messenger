@@ -13,3 +13,7 @@
 Стек
 - Spring boot, security, jpa
 - nimbus-jose-jwt
+
+### Запуск проекта
+1. Скопируйте репозиторий
+2. Находясь в папке проекта выполните docker compose up --build
